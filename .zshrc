@@ -30,3 +30,7 @@ setopt auto_cd
 # disable ctrl+s, ctrl+q
 setopt no_flow_control
 
+# alias
+alias vi="nvim"
+alias vim="nvim"
+alias view="nvim -R"
