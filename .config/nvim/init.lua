@@ -26,4 +26,5 @@ vim.opt.autoindent = true
 vim.opt.hlsearch = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.syntax = "on"
+vim.opt.termguicolors = true -- for iceberg colorscheme
 
