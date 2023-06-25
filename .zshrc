@@ -42,15 +42,7 @@ setopt auto_cd
 setopt no_flow_control
 
 # alias
-alias ..2='cd ../..'
-alias ..3='cd ../../..'
-alias ..4='cd ../../../..'
-alias ll="ls -a"
-alias vi="nvim"
-alias vim="nvim"
-alias view="nvim -R"
-alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
+source ~/.zsh/config/alias.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -83,6 +75,10 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light agkozak/zsh-z
+
+zinit ice as"program" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
+
 
 # Load powerlevel10k theme
 zinit ice depth"1" # git clone depth
