@@ -15,6 +15,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup("plugins", opts) -- load lua/lazy-plugins.lua
 
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<Space>ff', builtin.find_files, {})
+
 
 
 -- normal settings
