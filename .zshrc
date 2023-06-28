@@ -27,6 +27,16 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' '+m:{[:upper:
 zstyle ':completion:*' format '%B%F{blue}%d%f%b'
 zstyle ':completion:*' group-name ''
 
+### Highlight
+zstyle ':completion:*'              list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:messages'     format "$YELLOW" '%d' "$DEFAULT"
+zstyle ':completion:*:warnings'     format "$RED" 'No matches for:' "$YELLOW" '%d' "$DEFAULT"
+zstyle ':completion:*:descriptions' format "$YELLOW" 'Completing %B%d%b' "$DEFAULT"
+zstyle ':completion:*:corrections'  format "$YELLOW" '%B%d% ' "$RED" '(Errors: %e)%b' "$DEFAULT"
+
+### Separator
+zstyle ':completion:*'         list-separator ' ==> '
+zstyle ':completion:*:manuals' separate-sections true
 
 ### 補完侯補をメニューから選択する。
 ### select=2: 補完候補を一覧から選択する。補完候補が2つ以上なければすぐに補完する。
@@ -84,4 +94,18 @@ zinit light sharkdp/bat
 zinit ice depth"1" # git clone depth
 zinit light romkatv/powerlevel10k
 
+
+
+# man syntax highlight
+man() {
+        env \
+            LESS_TERMCAP_mb=$(printf "\e[1;33m") \
+            LESS_TERMCAP_md=$(printf "\e[1;33m") \
+            LESS_TERMCAP_me=$(printf "\e[0m") \
+            LESS_TERMCAP_se=$(printf "\e[0m") \
+            LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+            LESS_TERMCAP_ue=$(printf "\e[0m") \
+            LESS_TERMCAP_us=$(printf "\e[1;32m") \
+            man "$@"
+}
 

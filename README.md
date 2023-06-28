@@ -6,6 +6,9 @@ my dotfiles collection
 sudo apt install fzf
 zsh plugin needs fzf path
 
+sudo apt install exa
+cargo treesitter
+
 
 zsh-autosuggestions
 

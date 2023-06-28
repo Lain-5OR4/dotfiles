@@ -1,11 +1,17 @@
-###### alias #####
+###### alias ######
+
+# exa
+if [[ $(command -v exa) ]]; then
+  alias ls='exa --icons'
 
 # normal commands 
 alias ..2='cd ../..'
 alias ..3='cd ../../..'
 alias ..4='cd ../../../..'
-alias la="ls -a"
-alias ll="ls -alF"
+alias sudo='sudo '
+alias la="exa --icons -a"
+alias ll="exa --icons -alF"
+alias ll="exa --icons -T -alF"
 alias vi="nvim"
 alias vim="nvim"
 alias view="nvim -R"
