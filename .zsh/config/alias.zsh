@@ -3,7 +3,7 @@
 # exa
 if [[ $(command -v exa) ]]; then
   alias ls='exa --icons'
-
+fi
 # normal commands 
 alias ..2='cd ../..'
 alias ..3='cd ../../..'
@@ -11,7 +11,7 @@ alias ..4='cd ../../../..'
 alias sudo='sudo '
 alias la="exa --icons -a"
 alias ll="exa --icons -alF"
-alias ll="exa --icons -T -alF"
+alias llt="exa --icons -T -alF"
 alias vi="nvim"
 alias vim="nvim"
 alias view="nvim -R"
