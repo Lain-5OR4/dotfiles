@@ -1,6 +1,6 @@
 -- Pull in the weztrm API
 local wezterm = require 'wezterm'
-
+local act = wezterm.action
 -- this table will hold the configuration.
 local config = {}
 
@@ -14,13 +14,15 @@ end
 -- For example, changing the color scheme:
 config.color_scheme = 'iceberg-dark'
 
+config.initial_cols = 115
+config.initial_rows = 25
 
 -- transparent setting
-config.window_background_opacity = 0.7
+config.window_background_opacity = 0.8
 
 config.colors = {
 
-  background = '#50739d',
+  background = '#3B5B82',
 
     tab_bar = {
       -- The color of the strip that goes along the top of the window
@@ -94,6 +96,25 @@ config.colors = {
       },
     },
   }
--- and finally. return the configuration to wezterm
 
+
+-- right click as paste
+config.mouse_bindings = {
+	{
+		event = { Down = { streak = 1, button = "Right" } },
+		mods = "NONE",
+		action = wezterm.action_callback(function(window, pane)
+			local has_selection = window:get_selection_text_for_pane(pane) ~= ""
+			if has_selection then
+				window:perform_action(act.CopyTo("ClipboardAndPrimarySelection"), pane)
+				window:perform_action(act.ClearSelection, pane)
+			else
+				window:perform_action(act({ PasteFrom = "Clipboard" }), pane)
+			end
+		end),
+	},
+}
+
+
+-- and finally. return the configuration to wezterm
 return config

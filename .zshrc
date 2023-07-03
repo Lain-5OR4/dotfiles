@@ -13,7 +13,7 @@ HISTSIZE=100000             # メモリ上に保存する履歴のサイズ
 SAVEHIST=1000000            # 上述のファイルに保存する履歴のサイズ
 
 # share .zshhistory
-setopt inc_append_history   # 実行時に履歴をファイルにに追加していく
+setopt inc_append_history   # 実行時に履歴をファイルに追加していく
 setopt share_history        # 履歴を他のシェルとリアルタイム共有する
 
 #################################  COMPLEMENT  #################################
@@ -80,7 +80,7 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-
+### zinit plugin ###
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
@@ -89,12 +89,9 @@ zinit light agkozak/zsh-z
 zinit ice as"program" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 
-
 # Load powerlevel10k theme
 zinit ice depth"1" # git clone depth
 zinit light romkatv/powerlevel10k
-
-
 
 # man syntax highlight
 man() {
