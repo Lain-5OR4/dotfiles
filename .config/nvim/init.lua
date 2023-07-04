@@ -25,6 +25,7 @@ vim.opt.textwidth = 0
 vim.opt.autoindent = true
 vim.opt.hlsearch = true
 vim.opt.clipboard = "unnamedplus"
+vim.opt.whichwrap = "b,s,[,],<,>"
 -- vim.opt.syntax = "on"
 vim.opt.termguicolors = true -- for iceberg colorscheme
 vim.opt.swapfile = false
