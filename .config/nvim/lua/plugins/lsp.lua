@@ -22,15 +22,16 @@ return {
         },
         init = function()
             require("mason-lspconfig").setup()
+            require("lspconfig").rust_analyzer.setup {}
         end,
     },
-    {
-        'neovim/nvim-lspconfig',
-        init = function()
-          require('lspconfig') -- load lsp config
-        end,
-        dependencies = {
-          'nvim-lua/lsp-status.nvim',
-        }
-      },
+    -- {
+    --     'neovim/nvim-lspconfig',
+    --     init = function()
+    --       require('lspconfig') -- load lsp config
+    --     end,
+    --     dependencies = {
+    --       'nvim-lua/lsp-status.nvim',
+    --     }
+    -- },
 }
