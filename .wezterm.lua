@@ -21,7 +21,7 @@ config.initial_rows = 25
 config.window_background_opacity = 0.8
 
 config.colors = {
-
+  foreground = 'mediumvioletred',
   background = '#3B5B82',
 
     tab_bar = {
