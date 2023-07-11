@@ -1,15 +1,15 @@
 {
   "bufferline.nvim": { "branch": "main", "commit": "bf2f6b7edd0abf6b0732f5e5c0a8f30e51611c75" },
-  "lazy.nvim": { "branch": "main", "commit": "f8611632d0f9c6818e8eb54f9bcd1dad122b5a7f" },
-  "lsp-status.nvim": { "branch": "master", "commit": "54f48eb5017632d81d0fd40112065f1d062d0629" },
+  "lazy.nvim": { "branch": "main", "commit": "da8b00581a52f5f87ad2aba9f52171fda7491f18" },
   "lualine.nvim": { "branch": "master", "commit": "05d78e9fd0cdfb4545974a5aa14b1be95a86e9c9" },
-  "mason-lspconfig.nvim": { "branch": "main", "commit": "4f1c72767bec31397d59554f84096909b2887195" },
+  "mason-lspconfig.nvim": { "branch": "main", "commit": "796008869e67ef27a5aa5ac44c08ce2a60b89f55" },
   "mason.nvim": { "branch": "main", "commit": "5ad3e113b0c3fde3caba8630599373046f6197e8" },
-  "nvim-lspconfig": { "branch": "master", "commit": "0011c435282f043a018e23393cae06ed926c3f4a" },
-  "nvim-tree.lua": { "branch": "master", "commit": "4af572246ce49883e2a52c49203a19984454f2e0" },
-  "nvim-treesitter": { "branch": "master", "commit": "254f3da6832252d579962ca6dcafae9c164de4ed" },
+  "null-ls.nvim": { "branch": "main", "commit": "db09b6c691def0038c456551e4e2772186449f35" },
+  "nvim-lspconfig": { "branch": "master", "commit": "deade69789089c3da15237697156334fb3e943f0" },
+  "nvim-tree.lua": { "branch": "master", "commit": "a708bd2413d467929b5019ec1bce7b1f428438bc" },
+  "nvim-treesitter": { "branch": "master", "commit": "3af1220e18034eb2ce7d1c8e77055bc3bf3c1c36" },
   "nvim-web-devicons": { "branch": "master", "commit": "9ab9b0b894b2388a9dbcdee5f00ce72e25d85bf9" },
-  "plenary.nvim": { "branch": "master", "commit": "102c02903c74b93c705406bf362049383abc87c8" },
+  "plenary.nvim": { "branch": "master", "commit": "bda256fab0eb66a15e8190937e417e6a14ee5d72" },
   "telescope.nvim": { "branch": "master", "commit": "c1a2af0af69e80e14e6b226d3957a064cd080805" },
-  "tokyonight.nvim": { "branch": "main", "commit": "d785293494c59ce0940c00b8b044fc672d2902b1" }
+  "tokyonight.nvim": { "branch": "main", "commit": "284667adfff02b9a0adc65968c553c6096b543b6" }
 }
