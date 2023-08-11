@@ -26,10 +26,20 @@ vim.opt.autoindent = true
 vim.opt.hlsearch = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.whichwrap = "b,s,[,],<,>"
+vim.opt.ignorecase = true
+vim.opt.mouse = "a"
+
 -- vim.opt.syntax = "on"
 vim.opt.termguicolors = true -- for iceberg colorscheme
 vim.opt.swapfile = false
 
 -- keymap
 vim.keymap.set('i','jj','<Esc>')
+vim.keymap.set('n','<Space>h','^')
+vim.keymap.set('n','<Space>l','$')
+vim.keymap.set('i','<C-h>','<Left>')
+vim.keymap.set('i','<C-j>','<Down>')
+vim.keymap.set('i','<C-k>','<Up>')
+vim.keymap.set('i','<C-l>','<Right>')
 
+vim.cmd("set whichwrap+=<,>,[,],h,l")
