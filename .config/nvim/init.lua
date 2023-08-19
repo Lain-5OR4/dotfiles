@@ -28,6 +28,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.whichwrap = "b,s,[,],<,>"
 vim.opt.ignorecase = true
 vim.opt.mouse = "a"
+-- vim.opt.hidden = true
 
 -- vim.opt.syntax = "on"
 vim.opt.termguicolors = true -- for iceberg colorscheme
@@ -41,5 +42,12 @@ vim.keymap.set('i','<C-h>','<Left>')
 vim.keymap.set('i','<C-j>','<Down>')
 vim.keymap.set('i','<C-k>','<Up>')
 vim.keymap.set('i','<C-l>','<Right>')
+vim.keymap.set('n','<S-Tab>',':tabnew<CR>')
+vim.keymap.set('n', ':ntt', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', ':ntr', ':NvimTreeRefresh<CR>')
+vim.keymap.set('n', ':ntff', ':NvimTreeFindFile<CR>')
+-- Telescope kemap
+vim.keymap.set('n', ':ff', ':Telescope find_files<CR>')
+vim.keymap.set('n', ':fg', ':Telescope live_grep<CR>')
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
