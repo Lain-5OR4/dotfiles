@@ -3,19 +3,49 @@ my dotfiles collection
 
 
 # require install
-sudo apt install fzf
-zsh plugin needs fzf path
+<img src="doc/img/fzf.png" height=100>
 
-sudo apt install exa
-sudo apt install ripgrep
+## fzf
+	sudo apt install fzf
+zsh plugin needs fzf path<br>
+see -> https://github.com/junegunn/fzf
+
+---
+## exa
+
+	sudo apt install exa
+replacement for `ls` command
+see -> https://github.com/ogham/exa
+
+---
+## ripgrep
+	sudo apt install ripgrep
+for NvimTree livegrep func<br>
+see -> https://github.com/BurntSushi/ripgrep
+
+---
 cargo treesitter
 
+# Zsh plugin maneger
+![](doc/img/zinit.png)
+## zinit
+see -> https://github.com/zdharma-continuum/zinit
 
-zsh-autosuggestions
+# Zsh plugins
+### zsh-autosuggestions
 
-see https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh
+see -> https://github.com/zsh-users/zsh-autosuggestions/tree/master
 
-powerlevel10k
+### Fast Syntax Highlighting
+see -> https://github.com/zdharma-continuum/fast-syntax-highlighting
+
+### zsh-completions
+see -> https://github.com/zsh-users/zsh-completions
+
+### zsh-z
+see -> https://github.com/agkozak/zsh-z
 
 
-see https://github.com/romkatv/powerlevel10k#oh-my-zsh
+### powerlevel10k
+
+see -> https://github.com/romkatv/powerlevel10k#oh-my-zsh
