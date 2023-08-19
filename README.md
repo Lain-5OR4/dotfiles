@@ -7,6 +7,7 @@ sudo apt install fzf
 zsh plugin needs fzf path
 
 sudo apt install exa
+sudo apt install ripgrep
 cargo treesitter
 
 
