@@ -5,7 +5,7 @@ return {
         require('telescope').setup{
             defaults = { prompt_prefix = "🔭>" },
         }
-    	local builtin = require('telescope.builtin')
-    	vim.keymap.set('n', '<Space>ff', builtin.find_files, {})
+    	-- local builtin = require('telescope.builtin')
+    	-- vim.keymap.set('n', '<Space>ff', builtin.find_files, {})
     end,
 }
