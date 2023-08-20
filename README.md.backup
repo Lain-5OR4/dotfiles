@@ -32,20 +32,20 @@ cargo treesitter
 see -> https://github.com/zdharma-continuum/zinit
 
 # Zsh plugins
-### - zsh-autosuggestions
+### zsh-autosuggestions
 
 see -> https://github.com/zsh-users/zsh-autosuggestions/tree/master
 
-### - Fast Syntax Highlighting
+### Fast Syntax Highlighting
 see -> https://github.com/zdharma-continuum/fast-syntax-highlighting
 
-### - zsh-completions
+### zsh-completions
 see -> https://github.com/zsh-users/zsh-completions
 
-### - zsh-z
+### zsh-z
 see -> https://github.com/agkozak/zsh-z
 
 
-### - powerlevel10k
+### powerlevel10k
 
 see -> https://github.com/romkatv/powerlevel10k#oh-my-zsh
