@@ -17,7 +17,6 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         dependencies = {
-            {'hrsh7th/cmp-vsnip'},
             { 'hrsh7th/cmp-nvim-lsp' },
             { "williamboman/mason.nvim" },
             { "neovim/nvim-lspconfig" },
@@ -25,8 +24,8 @@ return {
         init = function()
             require("mason-lspconfig").setup_handlers {
                 function(server_name)
-                    local capabilities = require('cmp_nvim_lsp').default_capabilities()
-                    require("lspconfig")[server_name].setup { capabilities = capabilities }
+                    require("lspconfig")[server_name].setup { capabilities = require('cmp_nvim_lsp')
+                        .default_capabilities() }
                 end,
             }
         end,
@@ -35,8 +34,8 @@ return {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-path',
             'hrsh7th/vim-vsnip',
             'hrsh7th/cmp-vsnip',
@@ -48,15 +47,15 @@ return {
             local cmp = require('cmp')
             local lspkind = require('lspkind')
             cmp.setup({
-                -- enabled = true,
+                enabled = true,
                 snippet = {
                     expand = function(args)
                         vim.fn["vsnip#anonymous"](args.body)
                     end,
                 },
                 window = {
-                    -- completion = cmp.config.window.bordered(),
-                    -- documentation = cmp.config.window.bordered(),
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
                     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -70,14 +69,22 @@ return {
                     format = lspkind.cmp_format({})
                 },
                 sources = cmp.config.sources({
-                    { name = 'vsnip' },
                     { name = 'nvim_lsp' },
+                    { name = 'vsnip' },
                     { name = 'emoji' },
                     { name = 'nvim_lsp_signature_help' },
                 }, {
                     { name = 'buffer' },
                     { name = 'path' },
                 }),
+            })
+            cmp.setup.cmdline(':', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = 'path' }
+                }, {
+                    { name = 'cmdline', keyword_length = 2 }
+                })
             })
         end,
     },
