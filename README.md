@@ -5,47 +5,59 @@ my dotfiles collection
 # require install
 <img src="doc/img/fzf.png" height=100>
 
-## fzf
+- ## [fzf](https://github.com/junegunn/fzf)
+
 	sudo apt install fzf
+
 zsh plugin needs fzf path<br>
-see -> https://github.com/junegunn/fzf
 
 ---
-## exa
+- ## [exa](https://github.com/ogham/exa)
 
 	sudo apt install exa
-replacement for `ls` command
-see -> https://github.com/ogham/exa
+
+replacement for `ls` command<br>
 
 ---
-## ripgrep
+- ## [ripgrep](https://github.com/BurntSushi/ripgrep)
 	sudo apt install ripgrep
+
 for NvimTree livegrep func<br>
-see -> https://github.com/BurntSushi/ripgrep
 
 ---
 cargo treesitter
 
-# Zsh plugin maneger
+
+# Terminal Emulator
+
+
+## <img src="doc/img/wezterm-icon.png" height=80> [WezTerm](https://wezfurlong.org/wezterm/index.html)
+
+WezTerm github repo -> https://github.com/wez/wezterm
+
+---
+
+# Zsh plugin manager
 ![](doc/img/zinit.png)
-## zinit
-see -> https://github.com/zdharma-continuum/zinit
+
+## [zinit](https://github.com/zdharma-continuum/zinit)
+
+
 
 # Zsh plugins
-### - zsh-autosuggestions
+- ###  [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 
-see -> https://github.com/zsh-users/zsh-autosuggestions/tree/master
+- ### [Fast Syntax Highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting)
 
-### - Fast Syntax Highlighting
-see -> https://github.com/zdharma-continuum/fast-syntax-highlighting
+- ### [zsh-completions](https://github.com/zsh-users/zsh-completions)
 
-### - zsh-completions
-see -> https://github.com/zsh-users/zsh-completions
+- ### [zsh-z](https://github.com/agkozak/zsh-z)
 
-### - zsh-z
-see -> https://github.com/agkozak/zsh-z
+- ### [powerlevel10k](https://github.com/romkatv/powerlevel10k)
 
+- ### <img src="doc/img/bat.svg" height=40> [bat](https://github.com/sharkdp/bat)
 
-### - powerlevel10k
+---
 
-see -> https://github.com/romkatv/powerlevel10k#oh-my-zsh
+# NeoVim plugin manager
+- ## 💤[Lazy.nvim](https://github.com/folke/lazy.nvim)
