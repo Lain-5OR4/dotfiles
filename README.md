@@ -6,21 +6,19 @@ my dotfiles collection
 <img src="doc/img/fzf.png" height=100>
 
 - ## [fzf](https://github.com/junegunn/fzf)
-
-	sudo apt install fzf
+		sudo apt install fzf
 
 zsh plugin needs fzf path<br>
 
 ---
 - ## [exa](https://github.com/ogham/exa)
-
-	sudo apt install exa
+		sudo apt install exa
 
 replacement for `ls` command<br>
 
 ---
 - ## [ripgrep](https://github.com/BurntSushi/ripgrep)
-	sudo apt install ripgrep
+		sudo apt install ripgrep
 
 for NvimTree livegrep func<br>
 
