@@ -1,7 +1,6 @@
 -----------------------------------------------------------
 -- General Neovim settings and configuration
 -----------------------------------------------------------
-
 -- Important settings to load prior to package installation
 -- termguicolors -> colorizer throws an error
 -- fileencoding -> If not set first, "modifiable is off" during package installation
@@ -26,4 +25,4 @@ vim.wo.number = true
 vim.opt.syntax = "on"
 vim.opt.swapfile = false
 vim.opt.list = true
-vim.opt.listchars = { tab = "tab", trail = '_', extends = '>', precedes = '<' }
+vim.opt.listchars = { tab = ">.", trail = '-', extends = '>', precedes = '<', nbsp = '%', eol = '↵' }
