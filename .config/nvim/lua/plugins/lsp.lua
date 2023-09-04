@@ -26,6 +26,11 @@ return {
                 function(server_name)
                     require("lspconfig")[server_name].setup { capabilities = require('cmp_nvim_lsp')
                         .default_capabilities() }
+                    if server_name == "bashls" then
+                        require("lspconfig").bashls.setup({
+                            filetypes = { "sh", "zsh" }
+                        })
+                    end
                 end,
             }
         end,

@@ -25,3 +25,5 @@ vim.opt.number = true
 vim.wo.number = true
 vim.opt.syntax = "on"
 vim.opt.swapfile = false
+vim.opt.list = true
+vim.opt.listchars = { tab = "tab", trail = '_', extends = '>', precedes = '<' }
