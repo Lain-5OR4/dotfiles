@@ -31,4 +31,12 @@ vim.keymap.set('n', '<Space>tff', ':NvimTreeFindFile<CR>')
 vim.keymap.set('n', '<Space>ff', ':Telescope find_files<CR>')
 vim.keymap.set('n', '<Space>fg', ':Telescope live_grep<CR>')
 
+-- github copilot keymap
+vim.g.copilot_no_tab_map = true
+vim.keymap.set("i", "<C-g>", 'copilot#Accept("<CR>")', { silent = true, expr = true, replace_keycodes = false })
+-- vim.keymap.set("i", "<C-j>", "<Plug>(copilot-next)")
+-- vim.keymap.set("i", "<C-k>", "<Plug>(copilot-previous)")
+-- vim.keymap.set("i", "<C-o>", "<Plug>(copilot-dismiss)")
+-- vim.keymap.set("i", "<C-s>", "<Plug>(copilot-suggest)")
+
 vim.cmd("set whichwrap+=<,>,[,],h,l")
