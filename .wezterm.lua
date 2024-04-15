@@ -16,6 +16,7 @@ config.color_scheme = 'iceberg-dark'
 
 config.initial_cols = 115
 config.initial_rows = 25
+config.font_size = 20
 
 -- transparent setting
 config.window_background_opacity = 0.8
