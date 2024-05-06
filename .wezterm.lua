@@ -23,7 +23,7 @@ config.window_background_opacity = 0.8
 
 config.colors = {
   foreground = 'mediumvioletred',
-  background = '#3B5B82',
+  background = '#0b0022',
 
     tab_bar = {
       -- The color of the strip that goes along the top of the window

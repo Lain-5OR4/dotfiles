@@ -22,7 +22,7 @@ vim.opt.mouse = "a"
 vim.opt.hidden = true
 vim.opt.number = true
 vim.wo.number = true
-vim.opt.syntax = "on"
+--vim.opt.syntax = "on"
 vim.opt.swapfile = false
 vim.opt.list = true
 vim.opt.listchars = { tab = ">.", trail = '-', extends = '>', precedes = '<', nbsp = '%', eol = '↵' }
