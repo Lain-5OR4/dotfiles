@@ -11,8 +11,8 @@ my dotfiles collection
 zsh plugin needs fzf path<br>
 
 ---
-- ## [exa](https://github.com/ogham/exa)
-		sudo apt install exa
+- ## [exa](https://github.com/eza-community/eza)
+		read install.md
 
 replacement for `ls` command<br>
 
