@@ -24,6 +24,7 @@ return {
           "json",
           "dockerfile",
           "markdown",
+          "elixir",
           "diff"
         },
         highlight = {

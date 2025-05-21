@@ -1,3 +1,4 @@
+
 return {
     {
         "williamboman/mason.nvim",
@@ -22,17 +23,26 @@ return {
             { "neovim/nvim-lspconfig" },
         },
         init = function()
-            require("mason-lspconfig").setup_handlers {
-                function(server_name)
-                    require("lspconfig")[server_name].setup { capabilities = require('cmp_nvim_lsp')
-                        .default_capabilities() }
-                    if server_name == "bashls" then
-                        require("lspconfig").bashls.setup({
-                            filetypes = { "sh", "zsh" }
-                        })
-                    end
-                end,
-            }
+            -- Setup mason-lspconfig with the new v0.11 API
+            require("mason-lspconfig").setup({
+                -- Automatically enable installed servers
+                automatic_enable = true,
+            })
+            
+            -- Setup global capabilities for all servers
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            
+            -- Configure LSP servers using the new vim.lsp.config API
+            -- This replaces the old setup_handlers approach
+            -- vim.lsp.config.bashls = {
+               -- capabilities = capabilities,
+               -- filetypes = { "sh", "zsh" }
+            -- }
+            
+            -- Enable all configured servers
+            vim.lsp.enable({
+                capabilities = capabilities,
+            })
         end,
     },
     {
@@ -99,3 +109,4 @@ return {
         opts = {} -- this is equalent to setup({}) function
     },
 }
+
