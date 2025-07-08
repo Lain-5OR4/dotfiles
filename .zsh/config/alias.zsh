@@ -1,26 +1,58 @@
-###### alias ######
+# ═══════════════════════════════════════════════════════════════════════════════
+# ZSH ALIASES CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
 
-# eza
+# ═══════════════════════════════════════════════════════════════════════════════
+# FILE LISTING COMMANDS (eza)
+# ═══════════════════════════════════════════════════════════════════════════════
+# ezaコマンドが利用可能な場合のエイリアス設定
 if [[ $(command -v eza) ]]; then
-  alias ls='eza --icons'
+  alias ls='eza --icons'                    # 基本的なls（アイコン付き）
+  alias la='eza --icons -a'                 # 隠しファイルも表示
+  alias ll='eza --icons -alF'               # 詳細表示（長いリスト形式）
+  alias llt='eza --icons -T -alF'           # ツリー形式で表示
 fi
-# normal commands 
-alias ..2='cd ../..'
-alias ..3='cd ../../..'
-alias ..4='cd ../../../..'
-alias sudo='sudo '
-alias la="eza --icons -a"
-alias ll="eza --icons -alF"
-alias llt="eza --icons -T -alF"
-alias vi="nvim"
-alias vim="nvim"
-alias view="nvim -R"
-alias zshconfig="vim ~/.zshrc"
 
-# git
-alias g="git"
-alias gc="git commit"
-alias gcm="git commit -m"
-alias ga="git add"
-alias ga-all="git add ."
-alias gp="git push"
+# ═══════════════════════════════════════════════════════════════════════════════
+# DIRECTORY NAVIGATION
+# ═══════════════════════════════════════════════════════════════════════════════
+# 親ディレクトリへの移動ショートカット
+alias ..2='cd ../..'                       # 2階層上へ移動
+alias ..3='cd ../../..'                    # 3階層上へ移動
+alias ..4='cd ../../../..'                 # 4階層上へ移動
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EDITOR ALIASES
+# ═══════════════════════════════════════════════════════════════════════════════
+# Neovim関連のエイリアス
+alias vi='nvim'                            # vi → nvim
+alias vim='nvim'                           # vim → nvim
+alias view='nvim -R'                       # 読み取り専用モードでnvim起動
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SYSTEM COMMANDS
+# ═══════════════════════════════════════════════════════════════════════════════
+# システムコマンドの改良
+alias sudo='sudo '                         # sudoの後でエイリアスを有効にする
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CONFIGURATION FILE SHORTCUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+# 設定ファイルの編集ショートカット
+alias zshconfig='vim ~/.zshrc'             # zshrc設定を編集
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GIT ALIASES
+# ═══════════════════════════════════════════════════════════════════════════════
+# Git操作のショートカット
+alias g='git'                              # git短縮形
+alias ga='git add'                         # ファイルをステージング
+alias ga-all='git add .'                   # 全ての変更をステージング
+alias gc='git commit'                      # コミット
+alias gcm='git commit -m'                  # メッセージ付きコミット
+alias gp='git push'                        # プッシュ
+alias gs='git status'                      # ステータス確認
+alias gl='git log --oneline'               # 簡潔なログ表示
+alias gd='git diff'                        # 差分表示
+alias gb='git branch'                      # ブランチ表示
+alias gco='git checkout'                   # ブランチ切り替え
