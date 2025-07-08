@@ -32,7 +32,6 @@ vim.keymap.set('n', '<Space>ff', ':Telescope find_files<CR>')
 vim.keymap.set('n', '<Space>fg', ':Telescope live_grep<CR>')
 
 vim.keymap.set('n', '<F2>', ':Stdheader<CR>')
-vim.keymap.set('n', '<S-f>', ':!c_formatter_42 % <CR>')
 
 -- github copilot keymap
 vim.g.copilot_no_tab_map = true
