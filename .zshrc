@@ -106,9 +106,6 @@ man() {
             man "$@"
 }
 
-# rye
-source "$HOME/.rye/env"
-
 # bun completions
 [ -s "/Users/lain/.bun/_bun" ] && source "/Users/lain/.bun/_bun"
 
@@ -119,10 +116,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-alias francinette=/Users/lain/francinette/tester.sh
-
-alias paco=/Users/lain/francinette/tester.sh
-
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
+alias claude="/Users/lain/.claude/local/claude"
