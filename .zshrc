@@ -118,7 +118,7 @@ man() {
 # Bun（JavaScriptランタイム）の設定
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-[ -s "/Users/lain/.bun/_bun" ] && source "/Users/lain/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # Envman（環境変数管理）の設定
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
@@ -129,4 +129,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 eval "$(atuin init zsh)"
 
 # Claude Code CLI のエイリアス
-alias claude="/Users/lain/.claude/local/claude"
+alias claude="$HOME/.claude/local/claude"
