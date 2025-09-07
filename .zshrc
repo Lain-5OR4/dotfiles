@@ -128,5 +128,11 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 . "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
 
+# Mise（開発環境管理）の設定
+if type mise &>/dev/null; then
+  eval "$(mise activate zsh)"
+  eval "$(mise activate --shims)"
+fi
+
 # Claude Code CLI のエイリアス
 alias claude="$HOME/.claude/local/claude"
