@@ -135,4 +135,7 @@ if type mise &>/dev/null; then
 fi
 
 # Claude Code CLI のエイリアス
-alias claude="$HOME/.claude/local/claude"
+alias claude="~/.local/bin/claude"
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"

@@ -34,11 +34,19 @@ vim.keymap.set('n', '<Space>fg', ':Telescope live_grep<CR>')
 vim.keymap.set('n', '<F2>', ':Stdheader<CR>')
 
 -- github copilot keymap
-vim.g.copilot_no_tab_map = true
-vim.keymap.set("i", "<C-g>", 'copilot#Accept("<CR>")', { silent = true, expr = true, replace_keycodes = false })
+-- vim.g.copilot_no_tab_map = true
+-- vim.keymap.set("i", "<C-g>", 'copilot#Accept("<CR>")', { silent = true, expr = true, replace_keycodes = false })
 -- vim.keymap.set("i", "<C-j>", "<Plug>(copilot-next)")
 -- vim.keymap.set("i", "<C-k>", "<Plug>(copilot-previous)")
 -- vim.keymap.set("i", "<C-o>", "<Plug>(copilot-dismiss)")
 -- vim.keymap.set("i", "<C-s>", "<Plug>(copilot-suggest)")
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
+
+vim.diagnostic.config({
+  virtual_text = true, -- これをtrueにすると行の横にメッセージが出る
+  signs = true,        -- 行番号の左側にアイコンを表示
+  underline = true,    -- 波線を引く
+  update_in_insert = false, -- 入力中は更新しない（うるさくないように）
+  severity_sort = true,
+})
