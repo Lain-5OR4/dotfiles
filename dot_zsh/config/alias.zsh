@@ -29,16 +29,4 @@ alias sudo='sudo '                         # sudoの後でエイリアスを有�
 # 設定ファイルの編集ショートカット
 alias zshconfig='vim ~/.zshrc'             # zshrc設定を編集
 
-# GIT ALIASES
-# Git操作のショートカット
-alias g='git'                              # git短縮形
-alias ga='git add'                         # ファイルをステージング
-alias ga-all='git add .'                   # 全ての変更をステージング
-alias gc='git commit'                      # コミット
-alias gcm='git commit -m'                  # メッセージ付きコミット
-alias gp='git push'                        # プッシュ
-alias gs='git status'                      # ステータス確認
-alias gl='git log --oneline'               # 簡潔なログ表示
-alias gd='git diff'                        # 差分表示
-alias gb='git branch'                      # ブランチ表示
-alias gco='git checkout'                   # ブランチ切り替え
+# GIT ALIASES は .zsh/config/abbr.zsh に移行済み（zsh-abbrによる展開型に変更）
