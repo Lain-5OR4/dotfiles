@@ -10,7 +10,8 @@ dotfiles=(.zshrc)
 # .wezterm.lua, .p10k.zsh, .tmux.conf は chezmoi 管理に移行済み（dot_wezterm.lua, dot_p10k.zsh, dot_tmux.conf）
 
 # ディレクトリ構造を保持してリンクするディレクトリ
-dotdirs=(.zsh .config)
+dotdirs=(.config)
+# .zsh は chezmoi 管理に移行済み（dot_zsh）
 
 # DEPLOY SINGLE FILES
 # 単一ファイルのシンボリックリンクを作成
