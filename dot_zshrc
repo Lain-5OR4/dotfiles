@@ -125,8 +125,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # COMMAND LINE TOOLS
 # Atuin（シェル履歴管理）の設定
-. "$HOME/.atuin/bin/env"
-eval "$(atuin init zsh)"
+[ -f "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
+type atuin &>/dev/null && eval "$(atuin init zsh)"
 
 # Mise（開発環境管理）の設定
 if type mise &>/dev/null; then
@@ -138,4 +138,10 @@ fi
 alias claude="~/.local/bin/claude"
 
 # Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
+[ -f "$HOME/.vite-plus/env" ] && . "$HOME/.vite-plus/env"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
