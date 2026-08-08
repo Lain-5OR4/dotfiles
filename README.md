@@ -26,28 +26,29 @@ Make sure you have the following installed:
 - A [Nerd Font](https://www.nerdfonts.com/) for proper icon display
 
 ### Installation
-This repository is managed with [chezmoi](https://www.chezmoi.io/). `~/dotfiles` itself is chezmoi's source directory (configured via `sourceDir` in `~/.config/chezmoi/chezmoi.toml`), so no manual symlinking is required.
+This repository is managed with [chezmoi](https://www.chezmoi.io/) using its standard layout: the source lives at `~/.local/share/chezmoi` (no custom config needed). A `~/dotfiles` symlink points there for convenience.
 
-1. **Install dependencies** (see [Dependencies](#-dependencies) section or [detailed installation guide](docs/INSTALL.md)), including chezmoi itself:
+1. **Install chezmoi:**
    ```bash
-   brew install chezmoi   # or see https://www.chezmoi.io/install/
+   brew install chezmoi                        # macOS
+   sh -c "$(curl -fsLS get.chezmoi.io)"         # Linux (or any platform)
    ```
+   (see [Dependencies](#-dependencies) section or [detailed installation guide](docs/INSTALL.md) for everything else)
 
-2. **Clone this repository and point chezmoi at it:**
+2. **Clone and apply in one step:**
    ```bash
-   git clone <repository-url> ~/dotfiles
-   mkdir -p ~/.config/chezmoi
-   echo 'sourceDir = "'"$HOME"'/dotfiles"' > ~/.config/chezmoi/chezmoi.toml
-   chezmoi init --source ~/dotfiles
+   chezmoi init --apply Lain-5OR4
    ```
+   This clones `github.com/Lain-5OR4/dotfiles` into `~/.local/share/chezmoi` and deploys it. Drop `--apply` first if you want to `chezmoi diff` before applying.
 
-3. **Preview and apply:**
+3. **(Optional) Add the `~/dotfiles` convenience symlink:**
    ```bash
-   chezmoi diff    # 適用前に差分を確認
-   chezmoi apply
+   ln -s ~/.local/share/chezmoi ~/dotfiles
    ```
 
 4. **Restart your terminal** and enjoy!
+
+Day-to-day usage: edit files with `chezmoi edit <path>` (or edit directly under `chezmoi source-path`), preview with `chezmoi diff`, deploy with `chezmoi apply`. See [chezmoi's docs](https://www.chezmoi.io/user-guide/daily-operations/) for more.
 
 ## 📦 Dependencies
 

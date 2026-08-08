@@ -124,24 +124,21 @@ brew install font-jetbrains-mono-nerd-font
 
 ## 🚀 Deploy Dotfiles
 
-### 1. Clone Repository
+### 1. Install chezmoi
 ```bash
-git clone <your-repo-url> ~/dotfiles
-cd ~/dotfiles
+brew install chezmoi                        # macOS
+sh -c "$(curl -fsLS get.chezmoi.io)"         # Linux (or any platform)
 ```
 
-### 2. Install chezmoi and point it at this repo
+### 2. Clone and Apply
 ```bash
-brew install chezmoi   # or see https://www.chezmoi.io/install/
-mkdir -p ~/.config/chezmoi
-echo 'sourceDir = "'"$HOME"'/dotfiles"' > ~/.config/chezmoi/chezmoi.toml
-chezmoi init --source ~/dotfiles
+chezmoi init --apply Lain-5OR4
 ```
+This uses chezmoi's standard layout: it clones `github.com/Lain-5OR4/dotfiles` into `~/.local/share/chezmoi` and deploys it. Run without `--apply` first if you want to review with `chezmoi diff` before applying.
 
-### 3. Preview and Apply
+### 3. (Optional) Convenience symlink
 ```bash
-chezmoi diff
-chezmoi apply
+ln -s ~/.local/share/chezmoi ~/dotfiles
 ```
 
 ### 4. Restart Terminal
