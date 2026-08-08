@@ -6,7 +6,8 @@
 
 # CONFIGURATION
 # 直接ホームディレクトリにリンクするファイル（単一ファイル）
-dotfiles=(.zshrc .tmux.conf .wezterm.lua .p10k.zsh)
+dotfiles=(.zshrc .tmux.conf .p10k.zsh)
+# .wezterm.lua は chezmoi 管理に移行済み（dot_wezterm.lua）
 
 # ディレクトリ構造を保持してリンクするディレクトリ
 dotdirs=(.zsh .config)
