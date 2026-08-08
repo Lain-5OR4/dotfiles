@@ -1,8 +1,6 @@
 README.md
 LICENSE
 deploy.sh
-settings.json
-statusline-command.sh
 doc
 doc/**
 docs
