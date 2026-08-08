@@ -130,18 +130,18 @@ git clone <your-repo-url> ~/dotfiles
 cd ~/dotfiles
 ```
 
-### 2. Backup Existing Configs
+### 2. Install chezmoi and point it at this repo
 ```bash
-mkdir -p ~/dotfiles-backup
-for file in .zshrc .tmux.conf .wezterm.lua .p10k.zsh; do
-    [ -f ~/$file ] && cp ~/$file ~/dotfiles-backup/
-done
+brew install chezmoi   # or see https://www.chezmoi.io/install/
+mkdir -p ~/.config/chezmoi
+echo 'sourceDir = "'"$HOME"'/dotfiles"' > ~/.config/chezmoi/chezmoi.toml
+chezmoi init --source ~/dotfiles
 ```
 
-### 3. Run Deploy Script
+### 3. Preview and Apply
 ```bash
-chmod +x deploy.sh
-./deploy.sh
+chezmoi diff
+chezmoi apply
 ```
 
 ### 4. Restart Terminal

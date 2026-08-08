@@ -26,26 +26,28 @@ Make sure you have the following installed:
 - A [Nerd Font](https://www.nerdfonts.com/) for proper icon display
 
 ### Installation
-1. **Clone this repository:**
+This repository is managed with [chezmoi](https://www.chezmoi.io/). `~/dotfiles` itself is chezmoi's source directory (configured via `sourceDir` in `~/.config/chezmoi/chezmoi.toml`), so no manual symlinking is required.
+
+1. **Install dependencies** (see [Dependencies](#-dependencies) section or [detailed installation guide](docs/INSTALL.md)), including chezmoi itself:
+   ```bash
+   brew install chezmoi   # or see https://www.chezmoi.io/install/
+   ```
+
+2. **Clone this repository and point chezmoi at it:**
    ```bash
    git clone <repository-url> ~/dotfiles
-   cd ~/dotfiles
+   mkdir -p ~/.config/chezmoi
+   echo 'sourceDir = "'"$HOME"'/dotfiles"' > ~/.config/chezmoi/chezmoi.toml
+   chezmoi init --source ~/dotfiles
    ```
 
-2. **Install dependencies** (see [Dependencies](#-dependencies) section or [detailed installation guide](docs/INSTALL.md))
-
-3. **Backup existing configs** (recommended):
+3. **Preview and apply:**
    ```bash
-   mkdir -p ~/dotfiles-backup
-   cp ~/.zshrc ~/.tmux.conf ~/.wezterm.lua ~/dotfiles-backup/ 2>/dev/null || true
+   chezmoi diff    # 適用前に差分を確認
+   chezmoi apply
    ```
 
-4. **Run the deployment script:**
-   ```bash
-   ./deploy.sh
-   ```
-
-5. **Restart your terminal** and enjoy!
+4. **Restart your terminal** and enjoy!
 
 ## 📦 Dependencies
 
@@ -108,10 +110,8 @@ Make sure you have the following installed:
 ### Neovim Setup
 **Plugin Manager**: 💤[Lazy.nvim](https://github.com/folke/lazy.nvim)
 
-## 🔧 What the deploy script does
-The `deploy.sh` script creates symbolic links for:
-- Main dotfiles (`.zshrc`, `.tmux.conf`, `.wezterm.lua`, `.p10k.zsh`)
-- Additional configurations (`.zsh/` and `.config/` directories)
+## 🔧 How deployment works
+`chezmoi apply` reads the `dot_*` entries in this repo and materializes them under `$HOME` (e.g. `dot_zshrc` → `~/.zshrc`, `dot_config/nvim/` → `~/.config/nvim/`). Files listed in `.chezmoiignore` (README, LICENSE, `doc/`, `docs/`) are excluded from deployment.
 
 ## 🎨 Customization
 
@@ -166,7 +166,7 @@ Want to make these dotfiles your own? Check out the [comprehensive customization
 - Ensure you have the latest Neovim version (0.8+)
 
 **Permission errors during deployment**
-- Make sure deploy.sh is executable: `chmod +x deploy.sh`
+- Run `chezmoi doctor` to diagnose environment issues
 - Check file permissions in your home directory
 
 ### Getting Help
@@ -177,8 +177,8 @@ If you encounter issues:
 
 ## 📝 Notes
 - Make sure to have zsh as your default shell: `chsh -s $(which zsh)`
-- Install all dependencies before running the deploy script
-- **Always backup your existing dotfiles** before deployment
+- Install all dependencies before running `chezmoi apply`
+- Run `chezmoi diff` before `chezmoi apply` to review changes ahead of time
 - Restart your terminal after installation for changes to take effect
 
 ## 📄 License
