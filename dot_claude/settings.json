@@ -330,9 +330,15 @@
     ]
   },
   "model": "claude-sonnet-5",
+  "fallbackModel": ["opus", "haiku"],
   "statusLine": {
     "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
+    "command": "bash ~/.claude/statusline-command.sh",
+    "refreshInterval": 1
+  },
+  "subagentStatusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/subagent-statusline.sh"
   },
   "advisorModel": "fable",
   "tui": "fullscreen",
