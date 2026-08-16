@@ -30,3 +30,9 @@ alias sudo='sudo '                         # sudoの後でエイリアスを有�
 alias zshconfig='vim ~/.zshrc'             # zshrc設定を編集
 
 # GIT ALIASES は .zsh/config/abbr.zsh に移行済み（zsh-abbrによる展開型に変更）
+
+# NIX / HOME MANAGER
+# Home Manager関連のエイリアス
+# --impure は flake.nix が builtins.currentSystem でOS/CPUを実行時検出するために必須
+# (mac/Ubuntu間で同じコマンドにするためのトレードオフ)
+alias hms='home-manager switch --flake ~/.config/home-manager --impure' # home.nix変更を反映
