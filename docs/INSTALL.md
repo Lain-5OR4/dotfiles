@@ -33,6 +33,18 @@ curl -fsSL https://install.determinate.systems/nix | sh -s -- install
 ```
 This repo assumes the Determinate Systems installer (referenced in `.zshrc`'s Home Manager PATH setup). Works the same way on macOS and Ubuntu. Restart your terminal after installing.
 
+### 3a. (Ubuntu/Linux) Trust yourself for the neovim-nightly binary cache
+`flake.nix` declares a `nixConfig` pointing at the `nix-community.cachix.org` binary cache so `neovim-nightly-overlay` doesn't need to build from source (on Ubuntu x86_64-linux, building it locally has hit GCC LTO internal-compiler-error crashes — not 100% reproducible, but worth avoiding). For the daemon to actually honor that cache, your user must be a Nix "trusted user":
+
+```bash
+echo "trusted-users = root $(whoami)" | sudo tee -a /etc/nix/nix.custom.conf
+sudo systemctl restart nix-daemon
+nix show-config | grep trusted-users   # should list your username
+```
+Determinate Nix manages `/etc/nix/nix.conf` itself and points you at `/etc/nix/nix.custom.conf` for local overrides — editing `nix.conf` directly gets ignored. This step isn't required on macOS (no build failures observed there).
+
+Without this, the first `home-manager switch` will still print `do you want to allow configuration setting 'extra-substituters' ...` prompts (answer `y`/`y`) but then log `warning: ignoring untrusted substituter ..., you are not a trusted user` and fall back to building `neovim-nightly-overlay` from source — which usually still succeeds, just slower and occasionally flaky.
+
 ### 4. Deploy dotfiles, then bootstrap Home Manager
 Follow [Deploy Dotfiles](#-deploy-dotfiles) below first so `~/.config/home-manager/{flake.nix,home.nix}` exist, then run this **same command on both macOS and Ubuntu**:
 ```bash
@@ -46,7 +58,7 @@ chsh -s $(which zsh)
 ```
 
 ### Verified vs. untested
-Package resolution has been checked by evaluation for `aarch64-darwin`, `x86_64-linux`, and `aarch64-linux` (covers Apple Silicon Mac and Ubuntu on both common CPU architectures). Actual `home-manager switch` runs have only been performed on macOS so far — if a package fails to build on Ubuntu, check whether `neovim-nightly-overlay` or `zig` publishes a build for your exact system.
+Package resolution has been checked by evaluation for `aarch64-darwin`, `x86_64-linux`, and `aarch64-linux` (covers Apple Silicon Mac and Ubuntu on both common CPU architectures). `home-manager switch` has been run successfully on both macOS (`aarch64-darwin`) and Ubuntu (`x86_64-linux`). On Ubuntu, `neovim-nightly-overlay`'s source build hit an intermittent GCC LTO crash (internal compiler error) a couple of times before succeeding — see [step 3a](#3a-ubuntulinux-trust-yourself-for-the-neovim-nightly-binary-cache) above for the fix (use the binary cache instead of building locally). `aarch64-linux` is unverified on real hardware, only by evaluation.
 
 ### Manual fallback (skip Nix)
 If you'd rather not use Nix, install the same tools via your OS package manager:

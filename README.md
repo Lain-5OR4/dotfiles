@@ -54,6 +54,13 @@ chezmoiとHome Managerの役割分担は固定している: **chezmoiがdotfiles
    ```
    `chezmoi apply` の時点で `~/.config/home-manager/{flake.nix,home.nix}` は既に展開済み。このステップはそこで宣言されたパッケージ（fzf, eza, ripgrep, bat, gh, tmux, neovim, git、各種言語ランタイム等）を実際にインストールする。`flake.nix` は実行時にOS/CPUを検出する（`builtins.currentSystem`）ため `--impure` が必要で、そのおかげでマシンごとにコマンドを変える必要がない。初回switch後は `home-manager` が `PATH` に乗り、以降の変更は下記の `hms` エイリアスを使う。
 
+   **Ubuntu/Linuxの場合はこの前に一手間必要:** `neovim-nightly-overlay`はソースビルドが重く、GCCのLTOがクラッシュすることがある。`flake.nix`はビルド回避用にnix-communityのバイナリキャッシュを`nixConfig`で指定しているが、実際に使われるには自分がNixの`trusted-users`に入っている必要がある（Determinate Nixは`/etc/nix/nix.conf`を自前管理するため、`/etc/nix/nix.custom.conf`に書く）:
+   ```bash
+   echo "trusted-users = root $(whoami)" | sudo tee -a /etc/nix/nix.custom.conf
+   sudo systemctl restart nix-daemon
+   ```
+   やらなくても大抵はソースビルドにフォールバックして成功するが、遅く、まれに失敗する。詳細は [docs/INSTALL.md](docs/INSTALL.md#3a-ubuntulinux-trust-yourself-for-the-neovim-nightly-binary-cache) を参照。
+
 5. **ターミナルを再起動**すれば完了!
 
 日常的な使い方: `chezmoi edit <path>`（または `chezmoi source-path` 配下を直接編集）でファイルを編集し、`chezmoi diff` でプレビューし、`chezmoi apply` で反映する。詳細は [chezmoiのドキュメント](https://www.chezmoi.io/user-guide/daily-operations/) を参照。
@@ -63,7 +70,7 @@ chezmoiとHome Managerの役割分担は固定している: **chezmoiがdotfiles
 ## 📦 依存関係
 
 ### macOS + Ubuntu: Nix / Home Managerで管理
-`home.nix` は fzf, eza, ripgrep, bat, gh, tmux, git, neovim（nightly）, jq, fastfetch, deno, python, node, go, zig などを宣言している。個別にインストールする代わりに、上記の [Home Managerブートストラップ手順](#-クイックセットアップ) を実行する — `nix run github:nix-community/home-manager -- switch --flake ~/.config/home-manager --impure`（初回以降は `hms`）でまとめてインストール/更新できる。`flake.nix` は `builtins.currentSystem` で実行時にOS/CPU（`x86_64-linux`, `aarch64-linux`, `aarch64-darwin`, `x86_64-darwin` など）を検出するため、macOSノートPCでもUbuntu機でも同じコマンドで動く。`aarch64-darwin`・`x86_64-linux`・`aarch64-linux` での評価による検証は済んでいるが、実際の`switch`実行はまだmacOSでしか確認していない — Ubuntu上でビルドに失敗する場合は `neovim-nightly-overlay` や `zig` がそのプラットフォーム向けのバイナリを配っていない可能性が高い。
+`home.nix` は fzf, eza, ripgrep, bat, gh, tmux, git, neovim（nightly）, jq, fastfetch, deno, python, node, go, zig などを宣言している。個別にインストールする代わりに、上記の [Home Managerブートストラップ手順](#-クイックセットアップ) を実行する — `nix run github:nix-community/home-manager -- switch --flake ~/.config/home-manager --impure`（初回以降は `hms`）でまとめてインストール/更新できる。`flake.nix` は `builtins.currentSystem` で実行時にOS/CPU（`x86_64-linux`, `aarch64-linux`, `aarch64-darwin`, `x86_64-darwin` など）を検出するため、macOSノートPCでもUbuntu機でも同じコマンドで動く。`aarch64-darwin`・`x86_64-linux`・`aarch64-linux` での評価による検証に加え、macOS（`aarch64-darwin`）・Ubuntu（`x86_64-linux`）実機での`switch`実行も確認済み。Ubuntuでは`neovim-nightly-overlay`のソースビルドでGCCのLTOがまれにクラッシュすることがあったため、上記 [クイックセットアップ](#-クイックセットアップ) のUbuntu向け手順（バイナリキャッシュを使うためのtrusted-users設定）を推奨する。`aarch64-linux`実機は未検証（評価のみ）。
 
 ### 手動フォールバック（Arch、WSL、またはNixを使わないmacOS/Ubuntu）
 <img src="doc/img/fzf.png" height=100>
@@ -190,8 +197,9 @@ chezmoiとHome Managerの役割分担は固定している: **chezmoiがdotfiles
 - `chezmoi apply` は `flake.nix`/`home.nix` を展開するだけでNixは実行しない。実際にパッケージをインストールするには `nix run github:nix-community/home-manager -- switch --flake ~/.config/home-manager --impure`（初回）または `hms`（以降）を実行する
 - `~/.nix-profile/bin` が `PATH` に入っているか確認する — `.zshrc` は `~/.nix-profile/bin` が存在する場合のみそれを先頭に追加するため、Nixを新規インストールした直後は新しいターミナルセッションが必要
 
-**Ubuntuで `home-manager switch` がパッケージのビルドに失敗する**
-- プラットフォーム依存の入力（`neovim-nightly-overlay`、`zig`）がその `x86_64-linux`/`aarch64-linux` の組み合わせ向けのビルドをまだ提供していない可能性が高い。失敗したパッケージの上流flakeでプラットフォーム対応状況を確認すること。これは実際のUbuntu実機での`switch`検証がまだ済んでおらず、評価のみ確認済みの状態
+**Ubuntuで `home-manager switch` が `neovim-nightly-overlay` のビルドで失敗する（GCCの `internal compiler error`）**
+- `nix-community.cachix.org` のバイナリキャッシュが使われていれば発生しない。`warning: ignoring untrusted substituter ..., you are not a trusted user` が出ている場合は自分がNixの`trusted-users`に入っていないのが原因 — [クイックセットアップ](#-クイックセットアップ) のUbuntu向け手順（`/etc/nix/nix.custom.conf` に `trusted-users` を追記して `nix-daemon` を再起動）を実施すること
+- これをやらなくても大抵はソースビルドにフォールバックして成功する（GCCのLTOクラッシュは毎回ではなく再現性のない一時的な失敗だった）。それでも失敗が続く場合は再実行してみる
 
 ## 📝 補足
 - デフォルトシェルをzshにしておくこと: `chsh -s $(which zsh)`
