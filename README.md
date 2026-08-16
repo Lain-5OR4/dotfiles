@@ -54,7 +54,7 @@ chezmoiとHome Managerの役割分担は固定している: **chezmoiがdotfiles
    ```
    `chezmoi apply` の時点で `~/.config/home-manager/{flake.nix,home.nix}` は既に展開済み。このステップはそこで宣言されたパッケージ（fzf, eza, ripgrep, bat, gh, tmux, neovim, git、各種言語ランタイム等）を実際にインストールする。`flake.nix` は実行時にOS/CPUを検出する（`builtins.currentSystem`）ため `--impure` が必要で、そのおかげでマシンごとにコマンドを変える必要がない。初回switch後は `home-manager` が `PATH` に乗り、以降の変更は下記の `hms` エイリアスを使う。
 
-   **Ubuntu/Linuxの場合はこの前に一手間必要:** `neovim-nightly-overlay`はソースビルドが重く、GCCのLTOがクラッシュすることがある。`flake.nix`はビルド回避用にnix-communityのバイナリキャッシュを`nixConfig`で指定しているが、実際に使われるには自分がNixの`trusted-users`に入っている必要がある（Determinate Nixは`/etc/nix/nix.conf`を自前管理するため、`/etc/nix/nix.custom.conf`に書く）:
+   **Ubuntu/Linuxの場合はこの前に一手間必要:** `flake.nix`は`neovim-nightly-overlay`のビルド回避用にnix-communityのバイナリキャッシュを`nixConfig`で指定しているが、実際に使われるには自分がNixの`trusted-users`に入っている必要がある（Determinate Nixは`/etc/nix/nix.conf`を自前管理するため、`/etc/nix/nix.custom.conf`に書く）:
    ```bash
    echo "trusted-users = root $(whoami)" | sudo tee -a /etc/nix/nix.custom.conf
    sudo systemctl restart nix-daemon
@@ -172,34 +172,6 @@ chezmoiとHome Managerの役割分担は固定している: **chezmoiがdotfiles
 | `Ctrl + g` | プレフィックスキー |
 | `\` | 水平分割 |
 | `-` | 垂直分割 |
-
-## 🛠️ トラブルシューティング
-
-### よくある問題
-
-**フォントが正しく表示されない**
-- [nerdfonts.com](https://www.nerdfonts.com/) からNerd Fontをインストール
-- ターミナルの設定でインストールしたフォントを使用するよう設定
-
-**Zinitのインストールが失敗する**
-- インターネット接続を確認
-- 手動クローン: `git clone https://github.com/zdharma-continuum/zinit ~/.local/share/zinit/zinit.git`
-
-**Neovimプラグインが動かない**
-- Neovim内で `:checkhealth` を実行して診断
-- 最新版のNeovim（0.8以上）を使用しているか確認
-
-**デプロイ中に権限エラーが発生する**
-- `chezmoi doctor` で環境を診断
-- ホームディレクトリのファイル権限を確認
-
-**`chezmoi apply` 後、Home Managerでインストールしたはずのコマンドが見つからない**
-- `chezmoi apply` は `flake.nix`/`home.nix` を展開するだけでNixは実行しない。実際にパッケージをインストールするには `nix run github:nix-community/home-manager -- switch --flake ~/.config/home-manager --impure`（初回）または `hms`（以降）を実行する
-- `~/.nix-profile/bin` が `PATH` に入っているか確認する — `.zshrc` は `~/.nix-profile/bin` が存在する場合のみそれを先頭に追加するため、Nixを新規インストールした直後は新しいターミナルセッションが必要
-
-**Ubuntuで `home-manager switch` が `neovim-nightly-overlay` のビルドで失敗する（GCCの `internal compiler error`）**
-- `nix-community.cachix.org` のバイナリキャッシュが使われていれば発生しない。`warning: ignoring untrusted substituter ..., you are not a trusted user` が出ている場合は自分がNixの`trusted-users`に入っていないのが原因 — [クイックセットアップ](#-クイックセットアップ) のUbuntu向け手順（`/etc/nix/nix.custom.conf` に `trusted-users` を追記して `nix-daemon` を再起動）を実施すること
-- これをやらなくても大抵はソースビルドにフォールバックして成功する（GCCのLTOクラッシュは毎回ではなく再現性のない一時的な失敗だった）。それでも失敗が続く場合は再実行してみる
 
 ## 📝 補足
 - デフォルトシェルをzshにしておくこと: `chsh -s $(which zsh)`

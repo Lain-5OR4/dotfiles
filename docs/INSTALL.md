@@ -218,7 +218,3 @@ Edit your WezTerm config to use the installed Nerd Font:
 -- In ~/.wezterm.lua
 config.font = wezterm.font('JetBrains Mono Nerd Font')
 ```
-
-## 🐛 Troubleshooting
-
-If you encounter issues during installation, refer to the [main README troubleshooting section](../README.md#-トラブルシューティング) or check our [issues page](../../issues).

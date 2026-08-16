@@ -2,7 +2,7 @@
 {
   home.username = "lain";
   # macOSは /Users/<user>、Linux(Ubuntu)は /home/<user> とホームの位置が違うため出し分ける。
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/lain" else "/home/lain";
+  home.homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/lain" else "/home/lain";
   home.stateVersion = "26.05";
 
   # CLI 本体のみ管理する。dotfiles/設定ファイルは引き続き chezmoi が所有するため
