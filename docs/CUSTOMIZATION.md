@@ -223,6 +223,32 @@ return {
 }
 ```
 
+## 📦 Adding CLI Packages (Nix / Home Manager, macOS + Ubuntu)
+
+Edit `home.packages` in `home.nix` through chezmoi:
+
+```bash
+chezmoi edit ~/.config/home-manager/home.nix
+```
+
+```nix
+home.packages = with pkgs; [
+    jq
+    ripgrep
+    # ...
+    htop  # add a package here
+];
+```
+
+Search for a package name first with `nix search nixpkgs <name>`. Then deploy and install:
+
+```bash
+chezmoi apply   # writes the edited home.nix to ~/.config/home-manager/
+hms             # alias for `home-manager switch --flake ~/.config/home-manager --impure`; actually installs it
+```
+
+Always edit through `chezmoi edit`/the chezmoi source, not `~/.config/home-manager/home.nix` directly — editing the deployed copy makes it drift from the repo, since chezmoi doesn't know about changes made outside of it.
+
 ## 🖥️ Tmux Customization
 
 ### Custom Keybindings

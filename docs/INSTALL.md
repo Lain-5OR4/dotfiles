@@ -2,74 +2,67 @@
 
 This guide provides step-by-step installation instructions for different operating systems.
 
-## 🐧 Linux (Ubuntu/Debian)
+## 🐧🍎 macOS and Ubuntu Debian Setup (Nix Recommended)
 
-### 1. Install Prerequisites
+On both macOS and Ubuntu, most CLI dependencies (git, fzf, ripgrep, bat, eza, neovim, gh, tmux, and language runtimes) are managed declaratively via Nix + Home Manager instead of Homebrew/apt — see `dot_config/home-manager/{flake.nix,home.nix}` in this repo. `flake.nix` detects the OS/CPU at run time, so **the bootstrap command is identical on both platforms**. WezTerm and Nerd Fonts are GUI/font installs and stay on Homebrew/apt/manual download.
+
+### 1. Install OS-level prerequisites
 ```bash
-# Update package list
-sudo apt update
-
-# Install essential tools
-sudo apt install -y git zsh curl wget
-
-# Set zsh as default shell
+# Ubuntu/Debian — needed to fetch Nix/chezmoi and to set zsh as default shell
+sudo apt update && sudo apt install -y git zsh curl wget
 chsh -s $(which zsh)
-```
 
-### 2. Install Dependencies
-```bash
-# Install core tools
-sudo apt install -y fzf ripgrep bat eza
-
-# For Ubuntu 22.04+, bat might be installed as 'batcat'
-# Create alias if needed
-if command -v batcat > /dev/null; then
-    echo 'alias bat=batcat' >> ~/.bashrc
-fi
-```
-
-### 3. Install Neovim (Latest)
-```bash
-# Remove old version if exists
-sudo apt remove neovim
-
-# Download and install latest Neovim
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-sudo mv nvim.appimage /usr/local/bin/nvim
-```
-
-### 4. Install WezTerm
-```bash
-curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
-echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
-sudo apt update
-sudo apt install wezterm
-```
-
-## 🍎 macOS
-
-### 1. Install Homebrew (if not installed)
-```bash
+# macOS — Homebrew, for WezTerm + fonts only (not CLI packages)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### 2. Install Dependencies
+### 2. Install WezTerm
 ```bash
-# Install core tools
-brew install git zsh fzf ripgrep bat eza
+# Ubuntu/Debian
+curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
+echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+sudo apt update && sudo apt install wezterm
 
-# Install Neovim
-brew install neovim
-
-# Install WezTerm
+# macOS
 brew install --cask wezterm
 ```
 
-### 3. Set zsh as default shell
+### 3. Install Nix
+```bash
+curl -fsSL https://install.determinate.systems/nix | sh -s -- install
+```
+This repo assumes the Determinate Systems installer (referenced in `.zshrc`'s Home Manager PATH setup). Works the same way on macOS and Ubuntu. Restart your terminal after installing.
+
+### 4. Deploy dotfiles, then bootstrap Home Manager
+Follow [Deploy Dotfiles](#-deploy-dotfiles) below first so `~/.config/home-manager/{flake.nix,home.nix}` exist, then run this **same command on both macOS and Ubuntu**:
+```bash
+nix run github:nix-community/home-manager -- switch --flake ~/.config/home-manager --impure
+```
+This installs everything declared in `home.nix`. `flake.nix` picks the right package set for your OS/CPU via `builtins.currentSystem`, which is why `--impure` is required — it's what makes the one command portable instead of needing a per-machine flag. After this first run, `home-manager` is on `PATH` and future updates use the `hms` shell alias (`home-manager switch --flake ~/.config/home-manager --impure`) defined in `.zsh/config/alias.zsh`.
+
+### 5. Set zsh as default shell (macOS)
 ```bash
 chsh -s $(which zsh)
 ```
+
+### Verified vs. untested
+Package resolution has been checked by evaluation for `aarch64-darwin`, `x86_64-linux`, and `aarch64-linux` (covers Apple Silicon Mac and Ubuntu on both common CPU architectures). Actual `home-manager switch` runs have only been performed on macOS so far — if a package fails to build on Ubuntu, check whether `neovim-nightly-overlay` or `zig` publishes a build for your exact system.
+
+### Manual fallback (skip Nix)
+If you'd rather not use Nix, install the same tools via your OS package manager:
+```bash
+# Ubuntu/Debian
+sudo apt install -y fzf ripgrep bat eza neovim
+
+# For Ubuntu 22.04+, bat might be installed as 'batcat'
+if command -v batcat > /dev/null; then
+    echo 'alias bat=batcat' >> ~/.bashrc
+fi
+
+# macOS
+brew install git zsh fzf ripgrep bat eza neovim
+```
+Skip step 3/4 above (Nix/Home Manager) entirely in this case.
 
 ## 🏔️ Arch Linux
 
@@ -141,7 +134,13 @@ This uses chezmoi's standard layout: it clones `github.com/Lain-5OR4/dotfiles` i
 ln -s ~/.local/share/chezmoi ~/dotfiles
 ```
 
-### 4. Restart Terminal
+### 4. (macOS/Ubuntu, if not already done) Bootstrap Home Manager
+```bash
+nix run github:nix-community/home-manager -- switch --flake ~/.config/home-manager --impure
+```
+See the [macOS and Ubuntu section](#-macos-and-ubuntu-debian-setup-nix-recommended) above for details.
+
+### 5. Restart Terminal
 Close and reopen your terminal, or start a new zsh session:
 ```bash
 exec zsh
@@ -159,6 +158,12 @@ fzf --version
 rg --version
 bat --version
 eza --version
+```
+
+### 1a. (macOS/Ubuntu) Check Home Manager
+```bash
+home-manager --version   # should print a version, not "command not found"
+hms                      # re-applies home.nix; should report "no change" on a clean setup
 ```
 
 ### 2. Test Zsh Plugins
@@ -204,4 +209,4 @@ config.font = wezterm.font('JetBrains Mono Nerd Font')
 
 ## 🐛 Troubleshooting
 
-If you encounter issues during installation, refer to the [main README troubleshooting section](../README.md#-troubleshooting) or check our [issues page](../../issues).
+If you encounter issues during installation, refer to the [main README troubleshooting section](../README.md#-トラブルシューティング) or check our [issues page](../../issues).
